@@ -28,6 +28,7 @@
                     <td class="auto-style2">PROVINCIA</td>
                     <td>
                         <asp:DropDownList ID="ddlProvinciasInicio" runat="server">
+                            <asp:ListItem>--Seleccionar--</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                     <td>&nbsp;</td>
