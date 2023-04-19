@@ -13,6 +13,13 @@
         .auto-style2 {
             width: 169px;
         }
+        .auto-style3 {
+            width: 169px;
+            height: 26px;
+        }
+        .auto-style4 {
+            height: 26px;
+        }
     </style>
 </head>
 <body>
@@ -34,9 +41,13 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style3">LOCALIDAD </td>
+                    <td class="auto-style4">
+                        <asp:DropDownList ID="ddlLocalidadInicio" runat="server" Height="16px" Width="110px">
+                            <asp:ListItem>--Seleccionar--</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td class="auto-style4"></td>
                 </tr>
                 <tr>
                     <td class="auto-style2">&nbsp;</td>
