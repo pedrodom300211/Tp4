@@ -14,10 +14,9 @@ namespace TrabajoPractico4
         {
             if(IsPostBack==false)
             {
-                /*
                 SqlConnection cnViajes = new SqlConnection();
                 cnViajes.ConnectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=Viajes;Integrated Security=True";
-
+                /// Consulta Provincias Inicio
                 SqlCommand cmdProvinciasInicio = new SqlCommand("select * from provincias", cnViajes);
                 cnViajes.Open();
                 SqlDataReader drProvinciasInicio = cmdProvinciasInicio.ExecuteReader();
@@ -27,7 +26,7 @@ namespace TrabajoPractico4
                     ddlProvinciasInicio.DataBind();
                 } 
                 cnViajes.Close();
-
+                /// Consulta localidades Inicio
                 SqlCommand cmdLocalidadesInicio = new SqlCommand("select * from Localidades", cnViajes);
                 cnViajes.Open();
                 SqlDataReader drLocalidadesInicio = cmdLocalidadesInicio.ExecuteReader();
@@ -37,7 +36,16 @@ namespace TrabajoPractico4
                     ddlLocalidadInicio.DataBind();
                 }
                 cnViajes.Close();
-                */
+                /// Consulta Provincias Final
+                SqlCommand cmdProvinciasFinal = new SqlCommand("select * from Provincias", cnViajes);
+                cnViajes.Open();
+                SqlDataReader drProvinciasFinal = cmdProvinciasFinal.ExecuteReader();
+                while (drProvinciasFinal.Read())
+                {
+                    ddlProvinciasFinal.Items.Add(drProvinciasFinal["NombreProvincia"].ToString());
+                    ddlProvinciasFinal.DataBind();
+                }
+                cnViajes.Close();
             }
 
         }
