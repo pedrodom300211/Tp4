@@ -83,8 +83,12 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style2">LOCALIDAD</td>
+                    <td>
+                        <asp:DropDownList ID="ddlLocalidadFinal" runat="server">
+                            <asp:ListItem>--Seleccionar--</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
             </table>
