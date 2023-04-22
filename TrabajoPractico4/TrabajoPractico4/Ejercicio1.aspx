@@ -48,7 +48,7 @@
                 <tr>
                     <td class="auto-style2">PROVINCIA</td>
                     <td>
-                        <asp:DropDownList ID="ddlProvinciasInicio" runat="server" Width="110px">
+                        <asp:DropDownList ID="ddlProvinciasInicio" runat="server" Width="110px" AutoPostBack="True" OnSelectedIndexChanged="ddlProvinciasInicio_SelectedIndexChanged">
                             <asp:ListItem>--Seleccionar--</asp:ListItem>
                         </asp:DropDownList>
                     </td>
@@ -76,7 +76,7 @@
                 <tr>
                     <td class="auto-style2">PROVINCIA</td>
                     <td>
-                        <asp:DropDownList ID="ddlProvinciasFinal" runat="server" Width="110px">
+                        <asp:DropDownList ID="ddlProvinciasFinal" runat="server" Width="110px" AutoPostBack="True" OnSelectedIndexChanged="ddlProvinciasFinal_SelectedIndexChanged">
                             <asp:ListItem>--Seleccionar--</asp:ListItem>
                         </asp:DropDownList>
                     </td>
