@@ -10,6 +10,9 @@
         .auto-style1 {
             width: 100%;
         }
+        .auto-style2 {
+            width: 208px;
+        }
     </style>
 </head>
 <body>
@@ -17,44 +20,53 @@
         <div>
             <table class="auto-style1">
                 <tr>
-                    <td>Id Producto:&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="ddlIdProducto" runat="server">
+                    <td class="auto-style2">Id Producto:&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="ddlIdProducto" runat="server">
                 <asp:ListItem Value="==">Igual a: </asp:ListItem>
                 <asp:ListItem Value="&gt;">Mayor a:</asp:ListItem>
                 <asp:ListItem Value="&lt;">Menor a:</asp:ListItem>
             </asp:DropDownList>
-            <asp:TextBox ID="txtIdProducto" runat="server" OnTextChanged="txtIdProducto_TextChanged"></asp:TextBox>
                     </td>
+                    <td colspan="2">
+            <asp:TextBox ID="txtIdProducto" runat="server" OnTextChanged="txtIdProducto_TextChanged" Width="400px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>Id Categoria:&nbsp;&nbsp; <asp:DropDownList ID="ddlCategoria" runat="server">
+                    <td class="auto-style2">Id Categoria:&nbsp;&nbsp; <asp:DropDownList ID="ddlCategoria" runat="server">
                 <asp:ListItem Value="==">Igual a: </asp:ListItem>
                 <asp:ListItem Value="&gt;">Mayor a:</asp:ListItem>
                 <asp:ListItem Value="&lt;">Menor a:</asp:ListItem>
             </asp:DropDownList>
-            <asp:TextBox ID="txtCategoria" runat="server" OnTextChanged="txtIdProducto_TextChanged"></asp:TextBox>
                     </td>
+                    <td colspan="2">
+            <asp:TextBox ID="txtCategoria" runat="server" OnTextChanged="txtIdProducto_TextChanged" Width="400px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td>
+                        <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnQuitarFiltro" runat="server" Text="Quitar Filtro" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
