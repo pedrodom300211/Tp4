@@ -83,5 +83,23 @@ namespace TrabajoPractico4
             /// limpio los filtros txt "" y ddl index 0
             limpiarFiltros();
         }
+
+        protected void btnQuitarFiltro_Click(object sender, EventArgs e)
+        {
+            // Se borran los filtros que se seleccionaron
+            limpiarFiltros();
+
+            // Se vuelven a cargar los datos de las tablas
+            string consulta = "SELECT * FROM Productos";
+            string rutaNeptunoSQL = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
+            using (SqlConnection conexion = new SqlConnection(rutaNeptunoSQL))
+            {
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conexion);
+                DataTable tabla = new DataTable();
+                adaptador.Fill(tabla);
+                grdProductos.DataSource = tabla;
+                grdProductos.DataBind();
+            }
+        }
     }
 }
