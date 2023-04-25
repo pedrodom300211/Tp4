@@ -13,10 +13,5 @@ namespace TrabajoPractico4
         {
 
         }
-
-        protected void lbtnVerLibros_Click(object sender, EventArgs e)
-        {
-            Server.Transfer("Ejercicio3B.aspx");
-        }
     }
 }
