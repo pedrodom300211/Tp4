@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace TrabajoPractico4
 {
     public partial class Ejercicio3b : System.Web.UI.Page
@@ -12,6 +13,5 @@ namespace TrabajoPractico4
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
     }
 }
