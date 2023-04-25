@@ -10,87 +10,96 @@ using System.Data.SqlClient;
 namespace TrabajoPractico4
 {
     public partial class Ejercicio2 : System.Web.UI.Page
-    {
-
-        public void llamarProductosIgualA(string idProducto) {
-            
-                SqlConnection cn = new SqlConnection();
-                cn.ConnectionString = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
-
-                cn.Open();
-
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Productos WHERE IdProducto = " + idProducto, cn);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                grdProductos.DataSource = dr;
-                grdProductos.DataBind();
-            
-        }
-
-        public void llamarProductosMayorA(string idProducto)
-        {
-
-            SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
-
-            cn.Open();
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Productos WHERE IdProducto > " + idProducto, cn);
-
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            grdProductos.DataSource = dr;
-            grdProductos.DataBind();
-
-        }
-
-        public void llamarProductosMenorA(string idProducto)
-        {
-
-            SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
-
-            cn.Open();
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Productos WHERE IdProducto < " + idProducto, cn);
-
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            grdProductos.DataSource = dr;
-            grdProductos.DataBind();
-
-        }
-
-
+    {     
         protected void Page_Load(object sender, EventArgs e)
-        {
-            btnFiltrar_Click(sender, e); 
+        {            
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Productos", cn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            grdProductos.DataSource = dr;
+            grdProductos.DataBind();
         }
-
-        protected void txtIdProducto_TextChanged(object sender, EventArgs e)
+        private String generarStringConsulta() /// genera sentencia sql
         {
-
-        }
-
-        protected void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            if (txtIdProducto.Text.Trim() == "")
+            /// variable auxiliar para devolver sentencia
+            String sentenciaSQL = "";
+            /// Se analizan los valores en los controladores de texto y ddl
+            if (txtIdCategoria.Text.Trim() != "" && txtIdProducto.Text.Trim() != "")
             {
-
+                /// Filtros de textos IdProdcuto, Categoria y ddlIdProducto y ddlCategoria
+                sentenciaSQL += "SELECT * FROM Productos WHERE IdProducto " + ddlIdProducto.SelectedValue + " " + txtIdProducto.Text;
+                sentenciaSQL += " AND IdCategoría " + ddlIdCategoria.SelectedValue + " " + txtIdCategoria.Text;
             }
-            else {
-                if (ddlIdProducto.SelectedIndex == 0)
+            else
+            {
+                if (txtIdProducto.Text.Trim() != "")
                 {
-                    llamarProductosIgualA(txtIdProducto.Text);
+                    /// Filtros de textos IdProdcuto y ddlIdProducto
+                    sentenciaSQL += ("SELECT * FROM Productos WHERE IdProducto " + ddlIdProducto.SelectedValue + " " + txtIdProducto.Text);
                 }
-                else if (ddlIdProducto.SelectedIndex == 1){
-                    llamarProductosMayorA(txtIdProducto.Text); 
-                } else
+                else
                 {
-                    llamarProductosMenorA(txtIdProducto.Text);
-                }             
-            }                                
+                    if (txtIdCategoria.Text.Trim() != "")
+                    {
+                        /// Filtros de textos IdCategoria y ddlIdCategoria
+                        sentenciaSQL += ("SELECT * FROM Productos WHERE IdCategoría " + ddlIdCategoria.SelectedValue + " " + txtIdCategoria.Text);
+                    }
+                    else
+                    {
+                        /// Sin filtros
+                        sentenciaSQL += ("SELECT * FROM Productos");
+                    }
+                }
+            }
+            /// Retorno la sentencia a ejecutar
+            return sentenciaSQL;
+        }
+        private void consultarBaseDeDatos(String sentenciaSQL) /// ejecuta sentencia sql
+        {
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(sentenciaSQL, cn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            grdProductos.DataSource = dr;
+            grdProductos.DataBind();
+            cn.Close();
+        }
+        private void limpiarFiltros() /// limpia y reinica filtros txt y ddl
+        {
+            txtIdProducto.Text = ""; /// limpia TextBox ID de producto
+            txtIdCategoria.Text = ""; /// limpia TextBox ID de categoria
+            ddlIdProducto.SelectedIndex = 0; /// se selecciona el valor = de DropDownList ID prodcuto {=, >, <}
+            ddlIdCategoria.SelectedIndex = 0; /// se selecciona el valor = de DropDownList ID categoria {=, >, <}
+        }
+        protected void btnFiltrar_Click(object sender, EventArgs e) /// evento boton click
+        {
+            /// Variable donde estara la consulta es return de funcion generarStringConsulta()
+            /// LLamo funcion que genera consulta analizando los filtros retorna un string sentenciaSQL
+            /// LLamo funcion que ejecuta la consulta recive un string sentenciaSQL y ejecuta la consulta
+            consultarBaseDeDatos(generarStringConsulta());
+            /// limpio los filtros txt "" y ddl index 0
+            limpiarFiltros();
+        }
+
+        protected void btnQuitarFiltro_Click(object sender, EventArgs e)
+        {
+            // Se borran los filtros que se seleccionaron
+            limpiarFiltros();
+
+            // Se vuelven a cargar los datos de las tablas
+            string consulta = "SELECT * FROM Productos";
+            string rutaNeptunoSQL = "Data Source = localhost\\sqlexpress; Initial Catalog = Neptuno; Integrated Security = True";
+            using (SqlConnection conexion = new SqlConnection(rutaNeptunoSQL))
+            {
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conexion);
+                DataTable tabla = new DataTable();
+                adaptador.Fill(tabla);
+                grdProductos.DataSource = tabla;
+                grdProductos.DataBind();
+            }
         }
     }
 }
